@@ -1,0 +1,26 @@
+<section class="search">
+  <input
+    (keydown.enter)="search()"
+    class="search__input"
+    [(ngModel)]="searchValue"
+    type="text"
+    placeholder="Type product name.."
+  />
+  <button class="search__button" (click)="search()">Search</button>
+</section>
+
+<section *ngIf="results" >
+  <div class="searcher__container">
+    <article (click)="goToDetail(product)" class="card" *ngFor="let product of results.productos">
+      <img
+        (error)="errorHandler($event)"
+        [src]="'https://imagenes.preciosclaros.gob.ar/productos/' + product.id + '.jpg'"
+      />
+
+      <div class="card__title">{{ product.nombre }}</div>
+
+      <div class="card__presentation">Presentacion: {{ product.presentacion }}</div>
+      <div class="card__price">  ${{ product.precioMin }} - ${{product.precioMax}} </div>
+    </article>
+  </div>
+</section>

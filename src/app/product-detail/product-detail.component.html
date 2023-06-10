@@ -1,0 +1,16 @@
+<section>
+  <ng-container *ngIf="detail?.producto">
+    <h3>{{ detail?.producto.nombre }}</h3>
+    <div class="details__container">
+      <div *ngFor="let sucursal of detail.sucursales">
+        <div class="card" *ngIf="sucursal.message != 'La sucursal no contiene el producto.'">
+          <div class="card__place">{{ sucursal.banderaDescripcion }}</div>
+
+          <div class="card__adress">{{ sucursal.direccion }}</div>
+
+          <div class="card__price">${{ sucursal.preciosProducto?.precioLista }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

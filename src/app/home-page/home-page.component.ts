@@ -49,7 +49,7 @@ export class HomePageComponent implements OnInit {
     this.loading = true;
     this.results = null;
     this.priceApi
-      .search(this.searchValue, this.geo.lat, this.geo.lon, 1)
+      .search(this.searchValue, this.geo.lat, this.geo.lon)
       .subscribe((res: any) => {
         this.results = res;
       })

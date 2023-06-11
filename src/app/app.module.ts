@@ -7,12 +7,16 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductSearcherComponent } from './product-searcher/product-searcher.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailComponent,
-    ProductSearcherComponent
+    ProductSearcherComponent,
+    HomePageComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

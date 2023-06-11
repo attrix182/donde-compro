@@ -1,6 +1,6 @@
-<section>
+<section class="details__container">
   <ng-container *ngIf="detail?.producto">
-    <h3>{{ detail?.producto.nombre }}</h3>
+    <h3 style="color:white; padding:15px;">{{ detail?.producto.nombre }}</h3>
     <div class="details__container">
       <div *ngFor="let sucursal of detail.sucursales">
         <div class="card" *ngIf="sucursal.message != 'La sucursal no contiene el producto.'">

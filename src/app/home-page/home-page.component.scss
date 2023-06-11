@@ -1,0 +1,190 @@
+.home {
+  display: flex;
+  justify-content: center;
+  &__container {
+    background-image: url('../../assets/img/bg-dark.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  &__card {
+    &__location {
+      color: white;
+      margin-left: 15px;
+      padding: 5px;
+      input {
+        background: white;
+        border: 1px solid #dfe1e5;
+        border-radius: 24px;
+        padding: 5px;
+        font-size: 0.8rem;
+      }
+    }
+    .searchbar {
+      font-size: 14px;
+      font-family: arial, sans-serif;
+      color: #202124;
+      display: flex;
+      z-index: 3;
+      height: 44px;
+      background: white;
+      border: 1px solid #dfe1e5;
+      box-shadow: none;
+      border-radius: 24px;
+      margin: 0 auto;
+      max-width: 70vw;
+    }
+
+    .searchbar:hover {
+      box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+      border-color: rgba(223, 225, 229, 0);
+    }
+
+    .searchbar-wrapper {
+      flex: 1;
+      display: flex;
+      padding: 5px 8px 0 14px;
+    }
+
+    .searchbar-left {
+      font-size: 14px;
+      font-family: arial, sans-serif;
+      color: #202124;
+      display: flex;
+      align-items: center;
+      padding-right: 13px;
+      margin-top: -5px;
+    }
+
+    .search-icon-wrapper {
+      margin: auto;
+    }
+
+    .search-icon {
+      margin-top: 3px;
+      color: #9aa0a6;
+      height: 20px;
+      line-height: 20px;
+      width: 20px;
+    }
+
+    .searchbar-icon {
+      display: inline-block;
+      fill: currentColor;
+      height: 24px;
+      line-height: 24px;
+      position: relative;
+      width: 24px;
+      cursor: pointer;
+    }
+
+    .searchbar-center {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    .searchbar-input-spacer {
+      color: transparent;
+      flex: 100%;
+      white-space: pre;
+      height: 34px;
+      font-size: 16px;
+    }
+
+    .searchbar-input {
+      background-color: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+      color: rgba(0, 0, 0, 0.87);
+      word-wrap: break-word;
+      outline: none;
+      display: flex;
+      flex: 100%;
+      margin-top: -37px;
+      height: 34px;
+      font-size: 16px;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .searchbar-right {
+      display: flex;
+      flex: 0 0 auto;
+      margin-top: -5px;
+      align-items: stretch;
+      flex-direction: row;
+    }
+
+    .searchbar-clear-icon {
+      margin-right: 12px;
+    }
+
+    .voice-search {
+      cursor: pointer;
+      flex: 1 0 auto;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      border: 0;
+      background: transparent;
+      outline: none;
+      padding: 0 8px;
+      width: 1.8em;
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 30%;
+    }
+  }
+}
+
+.searcher {
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+.loader {
+  max-width: 270px;
+  height: 280px;
+  display: block;
+  margin: auto;
+  position: relative;
+  background: #fff;
+  box-sizing: border-box;
+}
+.loader::after {
+  content: '';
+  width: calc(100% - 30px);
+  height: calc(100% - 15px);
+  top: 15px;
+  left: 15px;
+  position: absolute;
+  background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5) 50%, transparent 100%),
+    linear-gradient(#ddd 100px, transparent 0), linear-gradient(#ddd 16px, transparent 0),
+    linear-gradient(#ddd 50px, transparent 0);
+  background-repeat: no-repeat;
+  background-size: 75px 175px, 100% 100px, 100% 16px, 100% 30px;
+  background-position: -185px 0, center 0, center 115px, center 142px;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+}
+
+@keyframes animloader {
+  to {
+    background-position: 185px 0, center 0, center 115px, center 142px;
+  }
+}

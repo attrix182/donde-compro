@@ -1,0 +1,11 @@
+<article (click)="goToDetail(product)" class="card">
+  <img
+    (error)="errorHandler($event)"
+    [src]="'https://imagenes.preciosclaros.gob.ar/productos/' + product.id + '.jpg'"
+  />
+
+  <div class="card__title">{{ product.nombre }}</div>
+
+  <div class="card__presentation">Presentacion: {{ product.presentacion }}</div>
+  <div class="card__price">  ${{ product.precioMin }} - ${{product.precioMax}} </div>
+</article>

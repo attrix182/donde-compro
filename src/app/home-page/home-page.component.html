@@ -3,14 +3,16 @@
   <div class="home__card__container">
     <article class="home__card">
      <div class="home__card__location">
+
       Tu ubicación:
       <input #inputAddress placeholder="Ejemplo 1234, Barrio..." type="text" [(ngModel)]="address" (keyup.enter)="getAddress()">
+    <button (click)="getAddress()" >📍</button>
     </div>
       <div>
         <div class="searchbar">
           <div class="searchbar-wrapper">
             <div class="searchbar-left">
-              <div class="search-icon-wrapper">
+              <div (click)="search()" class="search-icon-wrapper">
                 <span class="search-icon searchbar-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path

@@ -1,0 +1,23 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2>Modal Title</h2>
+    <div class="navbar">
+      <div class="navbar__location">
+        Tu ubicación:
+        <input
+          #inputAddress
+          placeholder="Ejemplo 1234, Barrio..."
+          type="text"
+          [(ngModel)]="address"
+          (keyup.enter)="getAddress()"
+        />
+        <button (click)="getAddress()">📍</button>
+        <div>
+          {{ addressText }}
+        </div>
+      </div>
+    </div>
+
+    <button (click)="close()">Close</button>
+  </div>
+</div>

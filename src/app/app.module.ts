@@ -9,6 +9,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductSearcherComponent } from './product-searcher/product-searcher.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalLocationComponent } from './components/modal-location/modal-location.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     ProductDetailComponent,
     ProductSearcherComponent,
     HomePageComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    NavbarComponent,
+    ModalLocationComponent
   ],
   imports: [
     BrowserModule,

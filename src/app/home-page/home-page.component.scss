@@ -11,18 +11,6 @@
   }
 
   &__card {
-    &__location {
-      color: white;
-      margin-left: 15px;
-      padding: 5px;
-      input {
-        background: white;
-        border: 1px solid #dfe1e5;
-        border-radius: 24px;
-        padding: 5px;
-        font-size: 0.8rem;
-      }
-    }
     .searchbar {
       font-size: 14px;
       font-family: arial, sans-serif;
@@ -36,20 +24,24 @@
       border-radius: 24px;
       margin: 0 auto;
       max-width: 70vw;
+
+
+    &:hover {
+      box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
+      border-color: rgba(225, 227, 230, 0);
+      background-color: #202124;
+      input{
+        color: white;
+      }
     }
 
-    .searchbar:hover {
-      box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
-      border-color: rgba(223, 225, 229, 0);
-    }
-
-    .searchbar-wrapper {
+    &-wrapper {
       flex: 1;
       display: flex;
       padding: 5px 8px 0 14px;
     }
 
-    .searchbar-left {
+    &-left {
       font-size: 14px;
       font-family: arial, sans-serif;
       color: #202124;
@@ -58,6 +50,7 @@
       padding-right: 13px;
       margin-top: -5px;
     }
+  }
 
     .search-icon-wrapper {
       margin: auto;
@@ -187,4 +180,25 @@
   to {
     background-position: 185px 0, center 0, center 115px, center 142px;
   }
+}
+
+.right-float-icon{
+  right: 0;
+  margin-right: 10px;
+  margin-top: 10px;
+  z-index: 1;
+  position: absolute;
+  button{
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+      &:hover{
+        background-color: #f2f2f2;
+        color: black;
+        box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
+      }
+  }
+
 }

@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   results!: searchProductResponse | null;
   geo: any;
   loading = false;
+  showLocationModal = false;
 
   constructor(private router: Router, private priceApi: PricesApiService) {}
 
@@ -28,6 +29,7 @@ export class HomePageComponent implements OnInit {
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
         this.priceApi.setGeo(this.geo);
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
+
           this.addressText = res.display_name;
           this.inputAddress.nativeElement.placeholder = this.addressText;
         });
@@ -56,5 +58,13 @@ export class HomePageComponent implements OnInit {
       .add(() => {
         this.loading = false;
       });
+  }
+
+  openLocationModal(){
+    this.showLocationModal = true
+  }
+
+  closeLocationModal(){
+    this.showLocationModal = false
   }
 }

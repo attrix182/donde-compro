@@ -1,13 +1,14 @@
 <section class="home__container">
-  
+
+
+  <div class="right-float-icon">
+    <button (click)="openLocationModal()">
+      <img src="assets/img/location-sign.svg"  width="30" height="30">
+    </button>
+  </div>
+
   <div class="home__card__container">
     <article class="home__card">
-     <div class="home__card__location">
-
-      Tu ubicación:
-      <input #inputAddress placeholder="Ejemplo 1234, Barrio..." type="text" [(ngModel)]="address" (keyup.enter)="getAddress()">
-    <button (click)="getAddress()" >📍</button>
-    </div>
       <div>
         <div class="searchbar">
           <div class="searchbar-wrapper">
@@ -72,3 +73,6 @@
     </div>
   </section>
 </section>
+
+
+<app-modal-location *ngIf="showLocationModal" (closeModal)="closeLocationModal()"></app-modal-location>

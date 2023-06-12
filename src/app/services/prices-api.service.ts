@@ -20,6 +20,7 @@ export class PricesApiService {
 
   getNameAddress(lat: number, lon: number) {
     {
+
       const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
 
       return this.http.get<any>(url);

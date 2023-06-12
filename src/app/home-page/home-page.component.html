@@ -74,5 +74,11 @@
   </section>
 </section>
 
+<section class="api-error">
+  <div *ngIf="apiError">
+    <h3>Error de servicio</h3>
+  </div>
+</section>
+
 
 <app-modal-location *ngIf="showLocationModal" (closeModal)="closeLocationModal()"></app-modal-location>

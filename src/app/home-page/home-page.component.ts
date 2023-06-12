@@ -18,6 +18,7 @@ export class HomePageComponent implements OnInit {
   geo: any;
   loading = false;
   showLocationModal = false;
+  apiError = false;
 
   constructor(private router: Router, private priceApi: PricesApiService) {}
 
@@ -40,12 +41,6 @@ export class HomePageComponent implements OnInit {
   ngAfterViewInit() {
     this.getLocalAddress();
   }
-  getAddress() {
-    this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
-      this.geo = res[0];
-      this.priceApi.setGeo(this.geo);
-    });
-  }
 
   search() {
     this.loading = true;
@@ -54,6 +49,7 @@ export class HomePageComponent implements OnInit {
       .search(this.searchValue, this.geo.lat, this.geo.lon)
       .subscribe((res: any) => {
         this.results = res;
+        res.status == 500 ? this.apiError = true : this.apiError = false;
       })
       .add(() => {
         this.loading = false;

@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
   margin: 0;
 }
-:root{
+:root {
   --primary-color: rgb(44, 44, 44);
   --secondary-color: rgb(78, 78, 78);
 }
 
-body{
-background-color: var(--main-bg-color);
+body {
+  background-color: var(--primary-color);
 }

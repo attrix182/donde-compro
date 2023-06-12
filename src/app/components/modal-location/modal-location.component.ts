@@ -28,6 +28,7 @@ export class ModalLocationComponent {
     this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
       this.geo = res[0];
       this.priceApi.setGeo(this.geo);
+      this.addressText = res[0].display_name;
     });
   }
 

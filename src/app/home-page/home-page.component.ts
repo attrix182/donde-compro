@@ -30,9 +30,7 @@ export class HomePageComponent implements OnInit {
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
         this.priceApi.setGeo(this.geo);
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
-
           this.addressText = res.display_name;
-          this.inputAddress.nativeElement.placeholder = this.addressText;
         });
       });
     }
@@ -46,7 +44,7 @@ export class HomePageComponent implements OnInit {
     this.loading = true;
     this.results = null;
     this.priceApi
-      .search(this.searchValue, this.geo.lat, this.geo.lon)
+      .search(this.searchValue, this.geo.lat, this.geo.lon, 10)
       .subscribe((res: any) => {
         this.results = res;
         res.status == 500 ? this.apiError = true : this.apiError = false;

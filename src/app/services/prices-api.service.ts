@@ -15,6 +15,7 @@ export class PricesApiService {
   }
 
   getGeo() {
+    if(!this.geo) this.getLocalAddress();
     return this.geo.asObservable();
   }
 
@@ -46,6 +47,23 @@ export class PricesApiService {
 
     return this.http.get(url, { params });
   }
+
+  getSucursales(lat: number, lng: number) {
+    const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/sucursales';
+    const params = {
+      lat: lat,
+      lng: lng
+    };
+    return this.http.get(url, { params });
+  }
+
+  getLocalAddress() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.geo.next({ lat: position.coords.latitude, lon: position.coords.longitude });
+    });
+  }
+}
 
   getProductoDetalle(id: string, lat: number, lng: number, limit = 50) {
     const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/producto';

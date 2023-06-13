@@ -32,4 +32,8 @@ export class ProductDetailComponent implements OnInit {
       console.log(data); // Realiza las acciones que desees con los datos recibidos
     });
   }
+
+  goBack(){
+    this.router.navigate(['/']);
+  }
 }

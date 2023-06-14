@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product, searchProductResponse } from '../models/models';
+import { searchProductResponse } from '../models/models';
 import { PricesApiService } from '../services/prices-api.service';
-import { BehaviorSubject } from 'rxjs';
-
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -40,25 +38,22 @@ export class HomePageComponent implements OnInit {
     this.getLocalAddress();
   }
 
-  search() {
+  search(event: any) {
     this.loading = true;
     this.results = null;
+    this.searchValue = event;
     this.priceApi
       .search(this.searchValue, this.geo.lat, this.geo.lon, 10)
       .subscribe((res: any) => {
         this.results = res;
-        res.status == 500 ? this.apiError = true : this.apiError = false;
+        res.status == 500 ? (this.apiError = true) : (this.apiError = false);
       })
       .add(() => {
         this.loading = false;
       });
   }
 
-  openLocationModal(){
-    this.showLocationModal = true
-  }
-
-  closeLocationModal(){
-    this.showLocationModal = false
+  toggleLocationModal() {
+    this.showLocationModal = !this.showLocationModal;
   }
 }

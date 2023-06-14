@@ -11,6 +11,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalLocationComponent } from './components/modal-location/modal-location.component';
+import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ModalLocationComponent } from './components/modal-location/modal-locati
     HomePageComponent,
     ProductCardComponent,
     NavbarComponent,
-    ModalLocationComponent
+    ModalLocationComponent,
+    InputSearcherComponent
   ],
   imports: [
     BrowserModule,

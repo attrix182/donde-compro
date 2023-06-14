@@ -34,6 +34,11 @@ export class InputSearcherComponent implements OnInit {
        this.voiceRecognitionSvc.getRealtimeText().subscribe((res: any) => {
         this.searchValue = res;
       })
+
+      setTimeout(() => {
+        this.listening = false;
+        this.voiceRecognitionSvc.stop();
+      }, 5000);
     } else {
       this.listening = false;
       this.voiceRecognitionSvc.stop();

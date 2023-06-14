@@ -81,3 +81,16 @@
     }
   }
 }
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+
+}
+
+.cheaper{
+  background-color: rgb(137 216 149);
+}

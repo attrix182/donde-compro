@@ -1,24 +1,41 @@
 <section class="details__container">
-
   <div class="left-float-icon">
     <button (click)="goBack()">
-      <img src="assets/img/back-arrow-icon.svg"  width="30" height="30">
+      <img src="assets/img/back-arrow-icon.svg" width="30" height="30" />
     </button>
   </div>
 
   <ng-container *ngIf="detail?.producto">
-    <h3 style="color:white; padding:15px;">{{ detail?.producto.nombre }}</h3>
+    <h3 style="color: white; padding: 15px">{{ detail.producto?.nombre }}</h3>
     <div class="details__container">
+      <div class="buttons"><button (click)="goToMoreCheap()">Ver el mas barato</button></div>
       <div *ngFor="let sucursal of detail.sucursales">
-        <div class="card" *ngIf="sucursal.message != 'La sucursal no contiene el producto.'">
+        <div [id]="sucursal.id" class="card" *ngIf="sucursal.message != 'La sucursal no contiene el producto.' && sucursal.sucursalTipo != 'Mayorista'">
           <div class="card-img">
-            <img  [src]="'https://imagenes.preciosclaros.gob.ar/comercios/' + sucursal.comercioId + '-' + sucursal.banderaId + '.jpg'" alt="">
+            <img
+              [src]="
+                'https://imagenes.preciosclaros.gob.ar/comercios/' +
+                sucursal.comercioId +
+                '-' +
+                sucursal.banderaId +
+                '.jpg'
+              "
+              alt=""
+            />
           </div>
           <div class="card__place">{{ sucursal.banderaDescripcion }}</div>
           <div class="card__adress">{{ sucursal.direccion }}</div>
-          <div>{{ sucursal.distanciaDescripcion}} </div>
+          <div>{{ sucursal.distanciaDescripcion }}</div>
           <div class="card__price">${{ sucursal.preciosProducto?.precioLista }}</div>
-          <div> <a target="_blank" [href]="'https://www.google.com/maps/search/?api=1&query=' + sucursal.direccion + ',' + sucursal.localidad">¿Como llegar?</a></div>
+          <div>
+            <a
+              target="_blank"
+              [href]="
+                'https://www.google.com/maps/search/?api=1&query=' + sucursal.direccion + ',' + sucursal.localidad
+              "
+              >¿Como llegar?</a
+            >
+          </div>
         </div>
       </div>
     </div>

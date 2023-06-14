@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PricesApiService } from '../services/prices-api.service';
+import { DetailProductResponse } from '../models/models';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +12,7 @@ import { PricesApiService } from '../services/prices-api.service';
 })
 export class ProductDetailComponent implements OnInit {
   id: string = '';
-  detail: any;
+  detail!: DetailProductResponse | any;
   geo: any;
 
   constructor(private router: Router, private pricesApi: PricesApiService) {
@@ -30,10 +31,32 @@ export class ProductDetailComponent implements OnInit {
     this.pricesApi.getProductoDetalle(id, this.geo.lat, this.geo.lon).subscribe((data: any) => {
       this.detail = data;
       console.log(data); // Realiza las acciones que desees con los datos recibidos
+
     });
   }
 
-  goBack(){
+
+
+
+
+  goToMoreCheap() {
+    let precioMasBajo = Infinity;
+    let idMasBarato = '';
+
+    for (const sucursal of this.detail.sucursales) {
+      const precioLista = sucursal.preciosProducto.precioLista;
+      if (precioLista < precioMasBajo) {
+        precioMasBajo = precioLista;
+        idMasBarato = sucursal.id;
+      }
+    }
+
+    let el = document.getElementById(idMasBarato);
+    el!.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el!.classList.add('cheaper')
+  }
+
+  goBack() {
     this.router.navigate(['/']);
   }
 }

@@ -48,6 +48,7 @@ export class ListModeComponent implements OnInit {
   }
 
   add(product: string) {
+    if(!product) return;
     this.productsList.push(product);
     console.log(this.productsList);
   }
@@ -57,7 +58,7 @@ export class ListModeComponent implements OnInit {
   }
 
   searchPrices() {
-    let productsIDs = [];
+
     this.productsIDs = this.searchList(this.productsList, this.sucursalesIds);
     console.log(this.productsIDs);
 
@@ -66,7 +67,7 @@ export class ListModeComponent implements OnInit {
   mapArraySucursales(response: any) {
     const arraySucursalIds: any = [];
 
-    response.sucursales.forEach((sucursal: Sucursal) => {
+    response.sucursales.forEach((sucursal: Sucursal)=> {
       const comercioId = sucursal.comercioId;
       const banderaId = sucursal.banderaId;
       const sucursalId = sucursal.sucursalId;
@@ -120,7 +121,7 @@ export class ListModeComponent implements OnInit {
         results.push({
           producto: place.producto,
           sucursal,
-          prodcutoId: place.producto.id,
+          productoId: place.producto.id,
           sucursalId: sucursal.id,
           precio: sucursal.preciosProducto?.precioLista
         });

@@ -6,20 +6,20 @@
   </div>
 
   <article class="home__card">
-    <app-input-searcher [searchValue]="searchValue" (searchEvent)="add($event)"></app-input-searcher>
+    <app-input-searcher [placeholder]="'Agrega productos...'" [searchValue]="searchValue" (searchEvent)="add($event)"></app-input-searcher>
   </article>
 
-  <section class="list">
+  <section class="list" *ngIf="productsList.length > 0">
     <div class="card">
       <ul>
         <li *ngFor="let item of productsList">{{ item }}</li>
       </ul>
     </div>
 
-    <button (click)="searchPrices()">¿Donde compro?</button>
+    <button (click)="searchPrices()" *ngIf="productsList.length > 0">¿Donde compro?</button>
   </section>
 
-  <section class="list">
+  <section class="list" *ngIf="results">
     <div class="card">
       <div *ngFor="let option of results">
         <article class="item" *ngIf="option.totalPrice">

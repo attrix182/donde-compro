@@ -19,7 +19,7 @@
   <section class="list" *ngIf="productsList.length > 0">
     <div class="card">
       <ul>
-        <li *ngFor="let item of productsList">{{ item }}</li>
+        <li (click)="deleteItem(item)" *ngFor="let item of productsList">{{ item }}</li>
       </ul>
     </div>
 

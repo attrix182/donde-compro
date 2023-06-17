@@ -48,6 +48,10 @@ export class ListModeComponent implements OnInit {
     });
   }
 
+  deleteItem(item:string) {
+    this.productsList.splice(this.productsList.indexOf(item), 1);
+  }
+
   add(product: string) {
     if(!product) return;
     this.productsList.push(product);

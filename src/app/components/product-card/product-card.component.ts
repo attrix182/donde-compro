@@ -17,7 +17,7 @@ export class ProductCardComponent implements OnInit {
 
   errorHandler(event: any) {
     console.debug(event);
-    event.target.src = "assets/no-image.jpeg";
+    event.target.src = "assets/no-image.webp";
  }
 
 

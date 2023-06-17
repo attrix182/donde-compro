@@ -5,6 +5,13 @@
     </button>
   </div>
 
+  <div class="left-float-icon">
+    <button (click)="goToSearcher()">
+      <img src="assets/img/back-arrow-icon.svg" width="30" height="30" />
+    </button>
+  </div>
+
+
   <article class="home__card">
     <app-input-searcher [placeholder]="'Agrega productos...'" [searchValue]="searchValue" (searchEvent)="add($event)"></app-input-searcher>
   </article>

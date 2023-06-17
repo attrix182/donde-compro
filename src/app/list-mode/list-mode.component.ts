@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PricesApiService } from '../services/prices-api.service';
 import { Sucursal, buyOption, buyOptions, searchProductResponse } from '../models/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-mode',
@@ -19,7 +20,7 @@ export class ListModeComponent implements OnInit {
   sucursalesIds: string[] = [];
   geo: any;
 
-  constructor(private priceApi: PricesApiService) {}
+  constructor(private router:Router, private priceApi: PricesApiService) {}
 
   ngOnInit(): void {}
 
@@ -62,6 +63,11 @@ export class ListModeComponent implements OnInit {
     this.productsIDs = this.searchList(this.productsList, this.sucursalesIds);
     console.log(this.productsIDs);
 
+  }
+
+
+  goToSearcher(){
+    this.router.navigate(['']);
   }
 
   mapArraySucursales(response: any) {

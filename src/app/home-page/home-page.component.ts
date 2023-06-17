@@ -88,6 +88,7 @@ export class HomePageComponent implements OnInit {
     this.router.navigate(['list-mode']);
   }
 
+
   searchList() {
     let list = ['agua', 'pepsi', 'manteca', 'harina'];
     let sucursales = [

@@ -12,6 +12,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalLocationComponent } from './components/modal-location/modal-location.component';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
+import { ListModeComponent } from './list-mode/list-mode.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InputSearcherComponent } from './components/input-searcher/input-search
     ProductCardComponent,
     NavbarComponent,
     ModalLocationComponent,
-    InputSearcherComponent
+    InputSearcherComponent,
+    ListModeComponent
   ],
   imports: [
     BrowserModule,

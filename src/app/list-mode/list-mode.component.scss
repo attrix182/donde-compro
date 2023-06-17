@@ -1,0 +1,79 @@
+.home {
+  display: flex;
+  justify-content: center;
+  &__container {
+    background-image: url('../../assets/img/bg-dark.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  &__card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    app-input-searcher {
+      margin-top: 10vh;
+      margin-bottom: 10vh;
+    }
+  }
+}
+
+.right-float-icon {
+  right: 0;
+  margin-right: 10px;
+  margin-top: 10px;
+  z-index: 1;
+  position: absolute;
+  button {
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+    &:hover {
+      background-color: #f2f2f2;
+      color: black;
+      box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
+    }
+  }
+}
+
+.list {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  li {
+    font-size: 1.2rem;
+  }
+
+}
+button{
+  border: none;
+  border-radius: 30px;
+  background-color: white;
+  color: black;
+  box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
+  cursor: pointer;
+  padding: 5px;
+  &:hover {
+    background-color: #f2f2f2;
+  }
+}
+
+
+.item{
+  background: rgb(231, 227, 227);
+  box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
+  padding: 5px;
+  margin-bottom: 10px;
+}

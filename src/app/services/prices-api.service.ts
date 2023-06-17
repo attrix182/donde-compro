@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/models';
+import { BehaviorSubject, Observable, forkJoin, map } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Product, searchProductResponse } from '../models/models';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,13 +15,12 @@ export class PricesApiService {
   }
 
   getGeo() {
-    if(!this.geo) this.getLocalAddress();
+    if (!this.geo) this.getLocalAddress();
     return this.geo.asObservable();
   }
 
   getNameAddress(lat: number, lon: number) {
     {
-
       const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
 
       return this.http.get<any>(url);
@@ -34,12 +33,25 @@ export class PricesApiService {
   }
 
   // Método para realizar la solicitud GET
-  search(searchValue: string, lat: number, lng: number, limit = 50) {
+  searchWithCoords(searchValue: string, lat: number, lng: number, limit = 50) {
     const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/productos';
     const params = {
       string: searchValue,
       lat: lat,
       lng: lng,
+      offset: '0',
+      limit: limit,
+      sort: '-cant_sucursales_disponible'
+    };
+
+    return this.http.get(url, { params });
+  }
+
+  searchWithSucursales(searchValue: string, arraySucursales: string, limit = 50) {
+    const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/productos';
+    const params = {
+      string: searchValue,
+      array_sucursales: arraySucursales,
       offset: '0',
       limit: limit,
       sort: '-cant_sucursales_disponible'
@@ -61,9 +73,9 @@ export class PricesApiService {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.geo.next({ lat: position.coords.latitude, lon: position.coords.longitude });
-    });
+      });
+    }
   }
-}
 
   getProductoDetalle(id: string, lat: number, lng: number, limit = 50) {
     const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/producto';
@@ -75,5 +87,57 @@ export class PricesApiService {
     };
 
     return this.http.get(url, { params });
+  }
+
+  searchListOfProducts(
+    searchValues: string[],
+    arraySucursales: string[],
+    limit = 50
+  ): Observable<searchProductResponse[]> {
+    const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/productos';
+    const requests: Observable<any>[] = [];
+
+    for (const searchValue of searchValues) {
+      const params = new HttpParams()
+        .set('string', searchValue)
+        .set('array_sucursales', arraySucursales.join(','))
+        .set('offset', '0')
+        .set('limit', limit.toString())
+        .set('sort', '-cant_sucursales_disponible');
+
+      const request = this.http.get(url, { params });
+      requests.push(request);
+    }
+
+    return forkJoin(requests).pipe(map((responses) => responses.filter((response) => response !== null)));
+  }
+
+  searchTotalPriceInEachMarket(productsIds: string[], arraySucursales: string[]) {
+    const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/producto';
+
+    const observables: Observable<any>[] = [];
+
+    for (const id of productsIds) {
+      const params = {
+        limit: 50,
+        id_producto: id,
+        array_sucursales: arraySucursales
+      };
+
+      observables.push(this.http.get(url, { params }));
+    }
+
+    return forkJoin(observables).pipe(
+      map((responses: any[]) => {
+        let returned: any[] = [];
+        for (const response of responses) {
+          if (response) {
+            returned.push(response);
+          }
+        }
+
+        return returned;
+      })
+    );
   }
 }

@@ -39,7 +39,7 @@ interface PreciosProducto {
   precio_bulto_sin_iva: string;
   precio_bulto_con_iva: string;
 }
-
+export
 interface Sucursal {
   distanciaNumero: number;
   distanciaDescripcion: string;
@@ -58,6 +58,7 @@ interface Sucursal {
   localidad: string;
   comercioRazonSocial: string;
   comercioId: number;
+  sucursalId?: number;
 }
 
 export interface DetailProductResponse {
@@ -72,4 +73,30 @@ export interface DetailProductResponse {
   maxLimitPermitido: number;
   totalPagina: number;
   sucursales: Sucursal[];
+}
+
+
+
+
+
+export interface SucursalesResponse {
+  status: number;
+  totalPagina: number;
+  total: number;
+  sucursales: Sucursal[];
+}
+
+
+export interface buyOptions {
+  producto: Product;
+  sucursal: Sucursal;
+  prodcutoId: string;
+  sucursalId: string;
+  precio: number;
+}
+
+export interface buyOption{
+  totalPrice: number,
+  sucursalId: string
+  sucursal:any
 }

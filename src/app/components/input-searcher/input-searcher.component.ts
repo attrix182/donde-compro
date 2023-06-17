@@ -10,7 +10,8 @@ export class InputSearcherComponent implements OnInit {
   @Output() searchEvent = new EventEmitter<string>();
   @Input() disabled = false;
   @Input() placeholder = 'Escribe un producto...';
-  searchValue: string = '';
+
+  @Input()  searchValue: string = '';
   listening: boolean = false;
 
   constructor(private voiceRecognitionSvc: VoiceRecognitionService) {

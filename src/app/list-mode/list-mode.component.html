@@ -1,0 +1,40 @@
+<section class="home__container">
+  <div class="right-float-icon">
+    <button (click)="toggleLocationModal()">
+      <img src="assets/img/location-sign.svg" width="30" height="30" />
+    </button>
+  </div>
+
+  <article class="home__card">
+    <app-input-searcher [searchValue]="searchValue" (searchEvent)="add($event)"></app-input-searcher>
+  </article>
+
+  <section class="list">
+    <div class="card">
+      <ul>
+        <li *ngFor="let item of productsList">{{ item }}</li>
+      </ul>
+    </div>
+
+    <button (click)="searchPrices()">¿Donde compro?</button>
+  </section>
+
+  <section class="list">
+    <div class="card">
+      <div *ngFor="let option of results">
+        <article class="item" *ngIf="option.totalPrice">
+          <strong>    Gastarias: ${{ option.totalPrice | number: '1.2-2' }}</strong>
+          <br>
+          En: {{ option.sucursal.banderaDescripcion }} de {{option.sucursal.direccion}}
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="loader-container" *ngIf="loading && !results">
+    <div class="loader"></div>
+  </section>
+
+  <app-modal-location *ngIf="showLocationModal" (closeModal)="toggleLocationModal()"></app-modal-location>
+</section>

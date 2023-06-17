@@ -84,6 +84,10 @@ export class HomePageComponent implements OnInit {
     this.showLocationModal = !this.showLocationModal;
   }
 
+  goToList(){
+    this.router.navigate(['list-mode']);
+  }
+
   searchList() {
     let list = ['agua', 'pepsi', 'manteca', 'harina'];
     let sucursales = [

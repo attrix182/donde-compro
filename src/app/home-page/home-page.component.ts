@@ -22,7 +22,6 @@ export class HomePageComponent implements OnInit {
   constructor(private router: Router, private priceApi: PricesApiService) {}
 
   ngOnInit(): void {
-   // this.searchList();
     this.getPlacesToBuy();
   }
 
@@ -86,17 +85,6 @@ export class HomePageComponent implements OnInit {
 
   goToList(){
     this.router.navigate(['list-mode']);
-  }
-
-
-  searchList() {
-    let list = ['agua', 'pepsi', 'manteca', 'harina'];
-    let sucursales = [
-      '15-1-5486,15-1-5188,10-1-227,10-3-465,15-1-5163,12-1-130,15-1-5149,10-3-443,11-5-1018,19-1-00825,15-1-25,10-3-459,19-1-03232,15-1-143,19-1-03298,19-1-03299,12-1-104,10-1-7,15-1-5573,15-1-1047,11-2-1050,10-3-446,2004-1-1,15-1-5363,12-1-65,23-1-6283,15-1-5132,10-3-462,15-1-5547,2003-1-7160'
-    ];
-    this.priceApi
-      .searchListOfProducts(list, sucursales)
-      .subscribe((results: searchProductResponse[]) => console.log(this.getProductsId(results)));
   }
 
   getProductsId(res: searchProductResponse[]): string[] {

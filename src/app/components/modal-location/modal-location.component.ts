@@ -30,11 +30,13 @@ export class ModalLocationComponent {
       this.priceApi.setGeo(this.geo);
       this.addressText = res[0].display_name;
     });
+    console.log(this.geo);
   }
 
   getLocalAddress() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
         this.priceApi.setGeo(this.geo);
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {

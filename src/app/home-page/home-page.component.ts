@@ -46,9 +46,12 @@ export class HomePageComponent implements OnInit {
     this.results = null;
     this.searchValue = event;
     let sucursales: any = [];
+    console.log(this.geo);
+    if(Array.isArray(this.geo)) this.geo = this.geo[0];
     this.priceApi
       .getSucursales(this.geo.lat, this.geo.lon)
       .subscribe((res: any) => {
+
         sucursales = this.mapArraySucursales(res);
       })
       .add(() => {
@@ -75,7 +78,6 @@ export class HomePageComponent implements OnInit {
     });
 
     const stringSucursalIds = arraySucursalIds.join(', ');
-    console.log(stringSucursalIds);
     return stringSucursalIds;
   }
 
@@ -106,14 +108,14 @@ export class HomePageComponent implements OnInit {
       '15-1-5486,15-1-5188,10-1-227,10-3-465,15-1-5163,12-1-130,15-1-5149,10-3-443,11-5-1018,19-1-00825'
     ];
     this.priceApi.searchTotalPriceInEachMarket(productsID, sucursales).subscribe((res: any) => {
-      console.log(res);
+
       this.getBestPlaceToBuy(res);
     });
   }
 
   getBestPlaceToBuy(places: any) {
     let results: any[] = [];
-    console.log(places);
+
     places.forEach((place: any) => {
       place.sucursales.forEach((sucursal: any) => {
         results.push({
@@ -125,9 +127,9 @@ export class HomePageComponent implements OnInit {
         });
       });
     });
-    console.log(results);
+
     let totals = this.calculateCarts(results);
-    console.log(totals);
+
   }
 
   calculateCarts(options: buyOptions[]) {

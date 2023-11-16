@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { Sucursal, SucursalesResponse, buyOption, buyOptions, searchProductResponse } from '../models/models';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { SucursalesResponse, searchProductResponse } from '../models/models';
 import { PricesApiService } from '../services/prices-api.service';
 import { SearchService } from '../services/search.service';
 @Component({
@@ -51,8 +50,13 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   search(event: any) {
+    this.apiError = false;
     this.loading = true;
     this.searchSVC.search(event, this.geo).then((res: any) => {
+      console.log(res);
+      if(res.status === 400){
+        this.apiError = true;
+      }
       this.results = res;
       this.loading = false;
     });

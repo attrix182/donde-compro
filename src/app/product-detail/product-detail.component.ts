@@ -9,18 +9,13 @@ import { DetailProductResponse } from '../models/models';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent {
   id: string = '';
   detail!: DetailProductResponse | any;
   geo: any;
 
   constructor(private router: Router, private pricesApi: PricesApiService) {
     this.id = this.router.url.split('/')[2];
-  }
-
-  ngOnInit(): void {
-
-
   }
 
   ngAfterViewInit() {

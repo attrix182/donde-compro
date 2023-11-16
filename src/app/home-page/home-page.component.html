@@ -28,6 +28,18 @@
       <div *ngFor="let product of results.productos">
         <app-product-card [product]="product"></app-product-card>
       </div>
+
+      @if(apiError){
+        <div class="api-error">
+          <span>
+            Parece que el servicio de precios no esta disponible.
+          </span>
+
+          <span>
+            Vuelve a intentar mas tarde
+          </span>
+        </div>
+      }
     </div>
   </section>
 </section>

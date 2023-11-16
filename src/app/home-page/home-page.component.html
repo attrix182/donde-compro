@@ -1,24 +1,20 @@
 <section class="home__container">
-
-
-  <div class="left-float-icon">
-    <button (click)="goToList()">
-      <img src="assets/img/list-svgrepo-com.svg" width="30" height="30" />
-    </button>
-  </div>
-
-
-
   <div class="right-float-icon">
     <button (click)="toggleLocationModal()">
       <img src="assets/img/location-sign.svg" width="30" height="30" />
-
     </button>
   </div>
 
   <article class="home__card">
     <app-input-searcher (searchEvent)="search($event)"></app-input-searcher>
+    <span class="home__card__address">
+      Ubicación: {{ addressText | slice: 0:24 }}
+      @if(addressText){
+        ...
+      }
+    </span>
   </article>
+
 
   <section class="loader-container" *ngIf="loading && !results">
     <div class="loader"></div>
@@ -31,12 +27,6 @@
       </div>
     </div>
   </section>
-</section>
-
-<section class="api-error">
-  <div *ngIf="apiError">
-    <h3>Error de servicio</h3>
-  </div>
 </section>
 
 <app-modal-location *ngIf="showLocationModal" (closeModal)="toggleLocationModal()"></app-modal-location>

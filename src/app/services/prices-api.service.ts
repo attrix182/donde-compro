@@ -11,12 +11,20 @@ export class PricesApiService {
   constructor(private http: HttpClient) {}
 
   setGeo(geo: any) {
+    localStorage.setItem('geoDC', JSON.stringify(geo));
     this.geo.next(geo);
   }
 
   getGeo() {
     if (!this.geo) this.getLocalAddress();
     return this.geo.asObservable();
+  }
+
+  getStoredGeo(){
+    const geo = localStorage.getItem('geoDC');
+    if (geo) {
+      return JSON.parse(geo);
+    }
   }
 
   getNameAddress(lat: number, lon: number) {

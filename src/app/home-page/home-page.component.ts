@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sucursal, SucursalesResponse, buyOption, buyOptions, searchProductResponse } from '../models/models';
 import { PricesApiService } from '../services/prices-api.service';
+import { SearchService } from '../services/search.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements AfterViewInit {
   @ViewChild('inputAddress') inputAddress: any;
   searchValue!: string;
   address!: string;
@@ -19,13 +20,19 @@ export class HomePageComponent implements OnInit {
   showLocationModal = false;
   apiError = false;
 
-  constructor(private router: Router, private priceApi: PricesApiService) {}
-
-  ngOnInit(): void {
-    this.getPlacesToBuy();
-  }
+  constructor(private priceApi: PricesApiService, private searchSVC:SearchService) {}
 
   getLocalAddress() {
+
+    const storedGeo = this.priceApi.getStoredGeo();
+    if (storedGeo) {
+      this.geo = storedGeo;
+      this.priceApi.setGeo(this.geo);
+      this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
+        this.addressText = res.display_name;
+      });
+    }else{
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
@@ -37,118 +44,22 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  }
+
   ngAfterViewInit() {
     this.getLocalAddress();
   }
 
   search(event: any) {
     this.loading = true;
-    this.results = null;
-    this.searchValue = event;
-    let sucursales: any = [];
-    console.log(this.geo);
-    if(Array.isArray(this.geo)) this.geo = this.geo[0];
-    this.priceApi
-      .getSucursales(this.geo.lat, this.geo.lon)
-      .subscribe((res: any) => {
-
-        sucursales = this.mapArraySucursales(res);
-      })
-      .add(() => {
-        this.priceApi
-          .searchWithSucursales(this.searchValue, sucursales)
-          .subscribe((res: any) => {
-            this.results = res;
-          })
-          .add(() => {
-            this.loading = false;
-          });
-      });
-  }
-
-  mapArraySucursales(response: any) {
-    const arraySucursalIds: any = [];
-
-    response.sucursales.forEach((sucursal: Sucursal) => {
-      const comercioId = sucursal.comercioId;
-      const banderaId = sucursal.banderaId;
-      const sucursalId = sucursal.sucursalId;
-      const sucursalIdString = `${comercioId}-${banderaId}-${sucursalId}`;
-      arraySucursalIds.push(sucursalIdString);
+    this.searchSVC.search(event, this.geo).then((res: any) => {
+      this.results = res;
+      this.loading = false;
     });
-
-    const stringSucursalIds = arraySucursalIds.join(', ');
-    return stringSucursalIds;
   }
+
 
   toggleLocationModal() {
     this.showLocationModal = !this.showLocationModal;
   }
-
-  goToList(){
-    this.router.navigate(['list-mode']);
-  }
-
-  getProductsId(res: searchProductResponse[]): string[] {
-    const productIds: string[] = [];
-
-    res.forEach((response: searchProductResponse) => {
-      if (response.productos && response.productos.length > 0) {
-        productIds.push(response.productos[0].id);
-      }
-    });
-
-    return productIds;
-  }
-
-  getPlacesToBuy() {
-    const productsID = ['7798062548679', '7791813555049', '7790742345806', '7790070507228'];
-
-    const sucursales = [
-      '15-1-5486,15-1-5188,10-1-227,10-3-465,15-1-5163,12-1-130,15-1-5149,10-3-443,11-5-1018,19-1-00825'
-    ];
-    this.priceApi.searchTotalPriceInEachMarket(productsID, sucursales).subscribe((res: any) => {
-
-      this.getBestPlaceToBuy(res);
-    });
-  }
-
-  getBestPlaceToBuy(places: any) {
-    let results: any[] = [];
-
-    places.forEach((place: any) => {
-      place.sucursales.forEach((sucursal: any) => {
-        results.push({
-          producto: place.producto,
-          sucursal,
-          prodcutoId: place.producto.id,
-          sucursalId: sucursal.id,
-          precio: sucursal.preciosProducto?.precioLista
-        });
-      });
-    });
-
-    let totals = this.calculateCarts(results);
-
-  }
-
-  calculateCarts(options: buyOptions[]) {
-    let buyOptions: buyOption[] = [];
-    const result = options.reduce((accumulator: any, item) => {
-      const existingItem: any = accumulator.find((x: any) => x.sucursalId === item.sucursalId);
-      if (existingItem) {
-        existingItem.totalPrice += item.precio;
-      } else {
-        accumulator.push({
-          sucursal: item.sucursal,
-          sucursalId: item.sucursalId,
-          totalPrice: item.precio
-        });
-      }
-
-      return accumulator;
-    }, []);
-    return result;
-  }
 }
-//productos.push({id: 1, sucursal: res.sucursal, precio: res.preciosProducto?.precioLista});

@@ -1,4 +1,4 @@
-<article (click)="goToDetail(product)" class="card">
+<!-- <article (click)="goToDetail(product)" class="card">
   <img
     (error)="errorHandler($event)"
     [src]="'https://imagenes.preciosclaros.gob.ar/productos/' + product.id + '.jpg'"
@@ -8,4 +8,18 @@
 
   <div class="card__presentation">Presentacion: {{ product.presentacion }}</div>
   <div class="card__price">  ${{ product.precioMin }} - ${{product.precioMax}} </div>
-</article>
+</article> -->
+
+
+<div class="card" (click)="goToDetail(product)">
+  <div class="card-image">
+    <img
+    (error)="errorHandler($event)"
+    [src]="'https://imagenes.preciosclaros.gob.ar/productos/' + product.id + '.jpg'"
+  />
+  </div>
+  <div class="category">  ${{ product.precioMin }} - ${{product.precioMax}} </div>
+  <div class="heading"> {{ product.nombre }}
+      <div class="author"> Presentacion:  <span class="name">{{ product.presentacion }}</span> </div>
+  </div>
+</div>

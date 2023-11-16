@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { PricesApiService } from '../services/prices-api.service';
 import { DetailProductResponse } from '../models/models';
 
@@ -59,4 +58,5 @@ export class ProductDetailComponent implements OnInit {
   goBack() {
     this.router.navigate(['/']);
   }
+
 }

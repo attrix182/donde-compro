@@ -15,9 +15,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
     app-input-searcher{
       margin-top: 10vh;
-      margin-bottom: 10vh;
+      margin-bottom: 2vh;
+    }
+
+    &__address{
+      margin-bottom: 2vh;
+      color: white;
+      font-family: 'Roboto', sans-serif;
     }
   }
 }

@@ -61,5 +61,6 @@ export class HomePageComponent implements AfterViewInit {
 
   toggleLocationModal() {
     this.showLocationModal = !this.showLocationModal;
+    this.getLocalAddress();
   }
 }

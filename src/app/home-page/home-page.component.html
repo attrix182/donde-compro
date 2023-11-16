@@ -8,13 +8,16 @@
   <article class="home__card">
     <app-input-searcher (searchEvent)="search($event)"></app-input-searcher>
     <span class="home__card__address">
-      Ubicación: {{ addressText | slice: 0:24 }}
-      @if(addressText){
-        ...
-      }
+      @if(addressText){ Ubicación: {{ addressText | slice : 0 : 26 }}... }
+        @else {
+        <ngx-skeleton-loader
+          appearance="line"
+          animation="pulse"
+          [theme]="{ height: '15px', width: '250px' }"
+        ></ngx-skeleton-loader>
+        }
     </span>
   </article>
-
 
   <section class="loader-container" *ngIf="loading && !results">
     <div class="loader"></div>

@@ -21,8 +21,7 @@ export class ModalLocationComponent {
 
   constructor(private router: Router, private priceApi: PricesApiService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getAddress() {
     this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
@@ -40,7 +39,6 @@ export class ModalLocationComponent {
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
         this.priceApi.setGeo(this.geo);
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
-
           this.addressText = res.display_name;
           this.inputAddress.nativeElement.placeholder = this.addressText;
         });
@@ -49,7 +47,14 @@ export class ModalLocationComponent {
   }
 
   ngAfterViewInit() {
-    this.getLocalAddress();
+    this.geo = this.priceApi.getStoredGeo();
+    if (this.geo) {
+      this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
+        this.addressText = res.display_name;
+        this.inputAddress.nativeElement.placeholder = this.addressText;
+      });
+    } else {
+      this.getLocalAddress();
+    }
   }
-
 }

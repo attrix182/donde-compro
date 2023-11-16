@@ -19,11 +19,26 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pricesApi.getGeo().subscribe((res: any) => {
-      console.log(res);
-      this.geo = res;
-      this.getProductoDetalle(this.id);
-    });
+
+
+  }
+
+  ngAfterViewInit() {
+    this.geo = this.pricesApi.getStoredGeo();
+    if (!this.geo){
+      this.getLocalAddress();
+    }
+
+    this.getProductoDetalle(this.id);
+  }
+  getLocalAddress() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
+        this.pricesApi.setGeo(this.geo);
+      });
+    }
   }
 
   getProductoDetalle(id: any) {
@@ -33,10 +48,6 @@ export class ProductDetailComponent implements OnInit {
 
     });
   }
-
-
-
-
 
   goToMoreCheap() {
     let precioMasBajo = Infinity;

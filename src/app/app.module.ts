@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalLocationComponent } from './components/modal-location/modal-location.component';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 import { ListModeComponent } from './list-mode/list-mode.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ListModeComponent } from './list-mode/list-mode.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

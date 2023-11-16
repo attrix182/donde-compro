@@ -6,7 +6,7 @@
   </div>
 
   <ng-container *ngIf="detail?.producto">
-    <h3 style="color: white; padding: 15px">{{ detail.producto?.nombre }}</h3>
+    <h3 class="details__title">{{ detail.producto?.nombre | titlecase }}</h3>
     <div class="details__container">
       <!-- <div class="buttons"><button (click)="goToMoreCheap()">Ver el mas barato</button></div> -->
       <div *ngFor="let sucursal of detail.sucursales">

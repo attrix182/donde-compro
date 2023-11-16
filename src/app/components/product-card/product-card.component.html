@@ -1,12 +1,17 @@
 <div class="card" (click)="goToDetail(product)">
   <div class="card-image">
     <img
-    (error)="errorHandler($event)"
-    [src]="'https://imagenes.preciosclaros.gob.ar/productos/' + product.id + '.jpg'"
-  />
+      (error)="errorHandler($event)"
+      [src]="'https://imagenes.preciosclaros.gob.ar/productos/' + product.id + '.jpg'"
+    />
   </div>
-  <div class="card__price">  ${{ product.precioMin }} - ${{product.precioMax}} </div>
-  <div class="card__name"> {{ product.nombre }}
-      <div class="card__presentation"> Presentacion:  <span class="card__size">{{ product.presentacion }}</span> </div>
+
+    <div class="card__price">${{ product.precioMin }} - ${{ product.precioMax }}</div>
+    <div class="card__name">
+      {{ product.nombre }}
+      <div class="card__presentation">
+        Presentacion: <span class="card__size">{{ product.presentacion }}</span>
+      </div>
+
   </div>
 </div>

@@ -1,6 +1,13 @@
+.details__title {
+  color: black;
+  padding: 15px;
+  background-color: rgb(254, 253, 253);
+  border-radius: 43px;
+  margin-top: 8px;
+}
+
 .card {
   background-color: rgb(254, 253, 253);
-  cursor: pointer;
   display: flex;
   justify-content: center;
   margin-top: 15px;
@@ -12,10 +19,6 @@
   padding: 15px;
   flex-wrap: wrap;
   margin: 10px;
-  &:hover{
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.506);
-    scale: 1.05;
-  }
 
   &__link {
     width: 150px;
@@ -31,20 +34,20 @@
     border: none;
     position: relative;
     cursor: pointer;
-    transition-duration: .2s;
+    transition-duration: 0.2s;
     box-shadow: 5px 5px 10px rgba(165, 81, 81, 0.116);
     padding-left: 8px;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
     text-decoration: none;
 
     &:hover {
       background-color: rgb(30, 99, 52);
-      transition-duration: .5s;
+      transition-duration: 0.5s;
     }
 
     &:active {
       transform: scale(0.97);
-      transition-duration: .2s;
+      transition-duration: 0.2s;
     }
 
     &:hover .svgIcon {
@@ -62,26 +65,23 @@
     fill: rgb(232, 223, 223);
   }
 
-
-
-
-  &__place{
+  &__place {
     font-size: 1.2rem;
     font-weight: 500;
     text-align: center;
   }
-  &-img{
+  &-img {
     display: flex;
     justify-content: center;
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
-    img{
-    height: 90px;
+    img {
+      height: 90px;
     }
   }
 
-  &__adress{
+  &__adress {
     font-size: 1.1rem;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -90,7 +90,7 @@
     width: 100%;
   }
 
-  &__price{
+  &__price {
     text-align: center;
     font-size: 1.4rem;
     font-weight: 600;
@@ -99,7 +99,6 @@
     text-align: center;
   }
 }
-
 
 .details {
   &__container {
@@ -131,15 +130,14 @@
   }
 }
 
-.buttons{
+.buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: nowrap;
   width: 100%;
-
 }
 
-.cheaper{
+.cheaper {
   background-color: rgb(137 216 149);
 }

@@ -23,6 +23,10 @@ export class ModalLocationComponent {
 
   ngOnInit(): void {}
 
+  getCurrentLocation(){
+
+  }
+
   getAddress() {
     this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
       this.geo = res[0];

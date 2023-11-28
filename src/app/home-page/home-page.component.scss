@@ -113,6 +113,31 @@
 }
 
 
+.info{
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  .card{
+    background-color: white;
+    max-width: 650px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 21px;
+
+    .cafecito{
+      display: flex;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+  }
+}
 
 .api-error {
   z-index: 1;

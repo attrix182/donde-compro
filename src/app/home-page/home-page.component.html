@@ -8,14 +8,13 @@
   <article class="home__card">
     <app-input-searcher (searchEvent)="search($event)"></app-input-searcher>
     <span class="home__card__address">
-      @if(addressText){ Ubicación: {{ addressText | slice : 0 : 26 }}... }
-        @else {
-        <ngx-skeleton-loader
-          appearance="line"
-          animation="pulse"
-          [theme]="{ height: '15px', width: '250px' }"
-        ></ngx-skeleton-loader>
-        }
+      @if(addressText){ Ubicación: {{ addressText | slice : 0 : 26 }}... } @else {
+      <ngx-skeleton-loader
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '15px', width: '250px' }"
+      ></ngx-skeleton-loader>
+      }
     </span>
   </article>
 
@@ -30,25 +29,68 @@
       </div>
 
       @if(apiError){
-        <div class="api-error">
-          <span>
-            Parece que el servicio de precios no esta disponible.
-          </span>
+      <div class="api-error">
+        <span> Parece que el servicio de precios no esta disponible. </span>
 
-          <span>
-            Vuelve a intentar mas tarde
-          </span>
-        </div>
+        <span> Vuelve a intentar mas tarde </span>
+      </div>
       }
     </div>
   </section>
+
+  <section class="info" *ngIf="!results && !loading">
+    <div class="card">
+      <h1>¿Que es Donde compro?</h1>
+      <p><b>Donde compro</b> es una web desarrollada para buscar el mejor precio cerca de tu ubicación.</p>
+      <hr />
+      <h1>¿Como uso la web?</h1>
+      <p>
+        Utiliza la barra de busqueda para buscar productos y ver el precio de los mismos. Asegurate de que la ubicación
+        sea la correcta, tambien puedes configurarla con el icono de la derecha en la parte superior
+      </p>
+      <hr />
+      <h1>¿De donde se obtienen los precios?</h1>
+      <p>
+        Los precios son obtenidos de un servicio del gobierno, llamado Precios Claros, el cual se actualiza todos los
+        dias obligatoriamente.
+      </p>
+      <hr />
+      <h1>El servicio no esta disponible</h1>
+      <p>
+        Si aparece ese error, es probable que se esten actualizando los precios y por lo tanto deja de funcionar, o hay
+        un problema tecnico en dicho servicio
+      </p>
+      <hr />
+      <h1>El precio en gondola no coincide con el de la web</h1>
+      <p>
+        En ese caso podes realizar un reclamo al <a href="tel:0800-666-1518">0800-666-1518</a>, de Lunes a viernes de 9
+        a 18hs
+      </p>
+      <hr />
+      <h1>¿Mas preguntas?</h1>
+      <p>
+        Si tienes mas dudas puedes consultar
+        <a href="https://www.preciosclaros.gob.ar/#faq">Preguntas frecuentes SEPA</a>
+      </p>
+      <hr />
+      <h1>Invitame un Cafecito</h1>
+      <p>
+        Si queres colaborar con el proyecto, podes hacerlo desde:
+        <br>
+
+        <a class="cafecito" href="https://cafecito.app/luciano_s" rel="noopener" target="_blank"
+          ><img
+            srcset="
+              https://cdn.cafecito.app/imgs/buttons/button_5.png       1x,
+              https://cdn.cafecito.app/imgs/buttons/button_5_2x.png    2x,
+              https://cdn.cafecito.app/imgs/buttons/button_5_3.75x.png 3.75x
+            "
+            src="https://cdn.cafecito.app/imgs/buttons/button_5.png"
+            alt="Invitame un café en cafecito.app"
+        /></a>
+      </p>
+    </div>
+  </section>
 </section>
-
-<!-- <footer>
-  <a>Información</a>
-  <a>Ayuda</a>
-  <a>Creditos</a>
-</footer> -->
-
 
 <app-modal-location *ngIf="showLocationModal" (closeModal)="toggleLocationModal()"></app-modal-location>

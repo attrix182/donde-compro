@@ -21,6 +21,10 @@ export class HomePageComponent implements AfterViewInit {
 
   constructor(private priceApi: PricesApiService, private searchSVC:SearchService) {}
 
+  showInfo(){
+    this.results = null;
+  }
+
   getLocalAddress() {
 
     const storedGeo = this.priceApi.getStoredGeo();

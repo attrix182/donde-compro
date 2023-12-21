@@ -53,7 +53,6 @@ export class ProductSearcherComponent {
     this.http.get(url, { params }).subscribe(
       (data: any) => {
         this.results = data;
-        console.log(data); // Realiza las acciones que desees con los datos recibidos
       },
       (error) => {
         console.error(error); // Maneja cualquier error que ocurra
@@ -62,7 +61,6 @@ export class ProductSearcherComponent {
   }
 
   goToDetail(product: Producto) {
-    console.log(product);
     this.router.navigate(['/detail', product.id]);
   }
 

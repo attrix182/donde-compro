@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { SucursalesResponse, searchProductResponse } from '../models/models';
 import { PricesApiService } from '../services/prices-api.service';
 import { SearchService } from '../services/search.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -15,20 +17,29 @@ export class HomePageComponent implements AfterViewInit {
   results!: searchProductResponse | null;
   sucursales!: SucursalesResponse;
   geo: any;
-  loading = false;
+  loading = true;
   showLocationModal = false;
   apiError = false;
   locationError:string = '';
 
-  constructor(private priceApi: PricesApiService, private searchSVC:SearchService) {}
+  constructor(private priceApi: PricesApiService, private searchSVC:SearchService, private route: ActivatedRoute) {}
 
   showInfo(){
     this.results = null;
   }
 
+  searchWithURL(){
+   let value = this.route.snapshot.queryParamMap.get('search');
+   if(value){
+    this.loading = true;
+    this.searchValue = decodeURIComponent(value);
+    this.search(this.searchValue);
+   }else{
+    this.loading = false;
+   }
+  }
   getLocalAddress() {
-    //pedir permisos ubicacion
-
+    //pedir permisos ubicacio
 
     const storedGeo = this.priceApi.getStoredGeo();
     if (storedGeo) {
@@ -36,6 +47,7 @@ export class HomePageComponent implements AfterViewInit {
       this.priceApi.setGeo(this.geo);
       this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
         this.addressText = res.display_name;
+        this.searchWithURL();
       });
     }else{
 
@@ -45,6 +57,7 @@ export class HomePageComponent implements AfterViewInit {
         this.priceApi.setGeo(this.geo);
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
           this.addressText = res.display_name;
+          this.searchWithURL();
         });
       }, (error) => {
         console.log(error.message);
@@ -70,6 +83,7 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   search(event: any) {
+    this.searchValue = event;
     this.apiError = false;
     this.loading = true;
     this.results = null;

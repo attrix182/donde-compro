@@ -18,7 +18,7 @@
   </div>
 
   <article class="home__card">
-    <app-input-searcher (searchEvent)="search($event)"></app-input-searcher>
+    <app-input-searcher [searchValue]="searchValue" (searchEvent)="search($event)"></app-input-searcher>
     <span class="home__card__address">
       @if(addressText){ Ubicación: {{ addressText | slice : 0 : 26 }}... } @else {
       <ngx-skeleton-loader
@@ -37,7 +37,7 @@
   <section *ngIf="results && !loading">
     <div class="searcher__container">
       <div *ngFor="let product of results.productos">
-        <app-product-card [product]="product"></app-product-card>
+        <app-product-card [searchValue]="searchValue" [product]="product"></app-product-card>
       </div>
 
       @if(apiError || results.productos.length == 0){

@@ -7,13 +7,12 @@ import { Product } from 'src/app/models/models';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent  {
   @Input('product') product!: Product;
+  @Input('searchValue') searchValue: string = '';
 
   constructor(private router:Router) { }
 
-  ngOnInit(): void {
-  }
 
   errorHandler(event: any) {
     console.debug(event);
@@ -22,7 +21,6 @@ export class ProductCardComponent implements OnInit {
 
 
   goToDetail(product: Product) {
-    console.log(product);
-    this.router.navigate(['/detail', product.id]);
+    this.router.navigate(['/detail', product.id], { queryParams: {  search: this.searchValue } });
   }
 }

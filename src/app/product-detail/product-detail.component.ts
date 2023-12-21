@@ -13,9 +13,10 @@ export class ProductDetailComponent {
   id: string = '';
   detail!: DetailProductResponse | any;
   geo: any;
-
+  searchValue:string = ''
   constructor(private router: Router, private pricesApi: PricesApiService) {
-    this.id = this.router.url.split('/')[2];
+    this.id = this.router.url.split('/')[2].split('?')[0];
+    this.searchValue = this.router.url.split('?')[1]?.split('=')[1] || '';
   }
 
   ngAfterViewInit() {
@@ -29,7 +30,6 @@ export class ProductDetailComponent {
   getLocalAddress() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
         this.pricesApi.setGeo(this.geo);
       });
@@ -39,8 +39,6 @@ export class ProductDetailComponent {
   getProductoDetalle(id: any) {
     this.pricesApi.getProductoDetalle(id, this.geo.lat, this.geo.lon).subscribe((data: any) => {
       this.detail = data;
-      console.log(data); // Realiza las acciones que desees con los datos recibidos
-
     });
   }
 
@@ -62,7 +60,7 @@ export class ProductDetailComponent {
   }
 
   goBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/'], { queryParams: { search: this.searchValue } });
   }
 
 }

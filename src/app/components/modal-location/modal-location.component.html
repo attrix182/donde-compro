@@ -38,7 +38,7 @@
                 maxlength="2048"
                 autocomplete="off"
                 [(ngModel)]="address"
-                (keyup.enter)="getAddress()"
+                (keydown.enter)="getAddress()"
                 placeholder="Calle 1234, Barrio..."
               />
               <button class="searchbar-button" (click)="getAddress()">Buscar</button>

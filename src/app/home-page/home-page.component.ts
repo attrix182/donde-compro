@@ -17,7 +17,7 @@ export class HomePageComponent implements AfterViewInit {
   results!: searchProductResponse | null;
   sucursales!: SucursalesResponse;
   geo: any;
-  loading = true;
+  loading = false;
   showLocationModal = false;
   apiError = false;
   locationError:string = '';

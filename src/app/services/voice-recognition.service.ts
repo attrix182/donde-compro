@@ -10,12 +10,15 @@ declare var webkitSpeechRecognition: any;
 export class VoiceRecognitionService {
 
  recognition =  new webkitSpeechRecognition();
+
   isStoppedSpeechRecog = false;
   public text = '';
   tempWords: any;
   realTimeText: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor() { }
+  constructor() {
+    console.log( window.navigator);
+  }
 
   init() {
 

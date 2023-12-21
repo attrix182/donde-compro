@@ -14,8 +14,8 @@ export class InputSearcherComponent implements OnInit {
   @Input()  searchValue: string = '';
   listening: boolean = false;
 
-  constructor(private voiceRecognitionSvc: VoiceRecognitionService) {
-    this.voiceRecognitionSvc.init()
+  constructor() {
+   // this.voiceRecognitionSvc.init()
   }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class InputSearcherComponent implements OnInit {
     this.searchEvent.emit(this.searchValue);
   }
 
-  voiceRecognition() {
+ /*  voiceRecognition() {
     if (!this.listening) {
       this.searchValue = '';
 
@@ -46,5 +46,5 @@ export class InputSearcherComponent implements OnInit {
     }
 
   }
-
+ */
 }

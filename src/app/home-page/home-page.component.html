@@ -40,10 +40,9 @@
         <app-product-card [product]="product"></app-product-card>
       </div>
 
-      @if(apiError){
+      @if(apiError || results.productos.length == 0){
       <div class="api-error">
-        <span> Parece que el servicio de precios no esta disponible. </span>
-
+        <span> Parece que el servicio de precios no esta disponible o el producto no existe. </span>
         <span> Vuelve a intentar mas tarde </span>
       </div>
       }
@@ -93,7 +92,7 @@
         Si tienes mas dudas puedes consultar
         <a href="https://www.preciosclaros.gob.ar/#faq">Preguntas frecuentes SEPA</a>
       </p>
-      <hr />
+      <!-- <hr />
       <h1>Invitame un Cafecito</h1>
       <p>
         Si queres colaborar con el proyecto, podes hacerlo desde:
@@ -109,7 +108,7 @@
             src="https://cdn.cafecito.app/imgs/buttons/button_5.png"
             alt="Invitame un café en cafecito.app"
         /></a>
-      </p>
+      </p> -->
     </div>
   </section>
 </section>

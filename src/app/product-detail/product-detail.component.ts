@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PricesApiService } from '../services/prices-api.service';
 import { DetailProductResponse } from '../models/models';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,7 +15,7 @@ export class ProductDetailComponent {
   detail!: DetailProductResponse | any;
   geo: any;
   searchValue:string = ''
-  constructor(private router: Router, private pricesApi: PricesApiService) {
+  constructor(private router: Router, private pricesApi: PricesApiService, private titleService:Title) {
     this.id = this.router.url.split('/')[2].split('?')[0];
     this.searchValue = this.router.url.split('?')[1]?.split('=')[1] || '';
   }
@@ -24,7 +25,6 @@ export class ProductDetailComponent {
     if (!this.geo){
       this.getLocalAddress();
     }
-
     this.getProductoDetalle(this.id);
   }
   getLocalAddress() {
@@ -39,6 +39,7 @@ export class ProductDetailComponent {
   getProductoDetalle(id: any) {
     this.pricesApi.getProductoDetalle(id, this.geo.lat, this.geo.lon).subscribe((data: any) => {
       this.detail = data;
+      this.titleService.setTitle(data.producto.nombre || 'Donde compro');
     });
   }
 

@@ -16,7 +16,7 @@ export class HomePageComponent implements AfterViewInit {
   sucursales!: SucursalesResponse;
   geo: any;
   loading = false;
-  showLocationModal = true;
+  showLocationModal = false;
   apiError = false;
   locationError:string = '';
 

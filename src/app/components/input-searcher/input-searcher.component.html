@@ -21,7 +21,7 @@
         maxlength="2048"
         autocomplete="off"
         [(ngModel)]="searchValue"
-        (keyup.enter)="search()"
+        (keydown.enter)="search()"
         [placeholder]="placeholder"
       />
     </div>

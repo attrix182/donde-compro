@@ -14,6 +14,7 @@ import { ModalLocationComponent } from './components/modal-location/modal-locati
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 import { ListModeComponent } from './list-mode/list-mode.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

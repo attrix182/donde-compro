@@ -24,15 +24,7 @@ export class ShoppingCartService {
     "presentacion": "500.0 cc",
     "cantSucursalesDisponible": 8
 }] */
-  cart$: BehaviorSubject<any> = new BehaviorSubject( [{
-    "marca": "COCA COLA",
-    "id": "7790895067556",
-    "precioMax": 1575,
-    "precioMin": 1007.7,
-    "nombre": "Coca Cola sin Azucar 1.5 Lt",
-    "presentacion": "1.5 lt",
-    "cantSucursalesDisponible": 10
-}]);
+  cart$: BehaviorSubject<any> = new BehaviorSubject( []);
   cart: any = [];
   constructor() {}
 

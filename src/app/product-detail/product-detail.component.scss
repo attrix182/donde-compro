@@ -137,8 +137,37 @@
   justify-content: center;
   flex-wrap: nowrap;
   width: 100%;
+  margin-top: 5px;
+  padding: 15px;
+  .cheap__button{
+    width: 150px;
+    height: 40px;
+    gap: 10px;
+    background-color: rgb(44 149 77);
+    border-radius: 30px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    box-shadow: 5px 5px 10px rgba(165, 81, 81, 0.116);
+    padding-left: 8px;
+    transition-duration: 0.5s;
+    text-decoration: none;
+
+    &:hover {
+      background-color: rgb(30, 99, 52);
+      transition-duration: 0.5s;
+    }
+  }
 }
 
 .cheaper {
-  background-color: rgb(137 216 149);
+  background-color: rgb(82, 176, 112);
+  transition-duration: 0.5s;
+  .card__link{
+    background-color: white;
+    color: black;
+  }
 }

@@ -6,9 +6,11 @@
   </div>
 
   <ng-container *ngIf="detail?.producto">
-    <h5 class="details__title" [title]="detail.producto?.nombre">{{ detail.producto?.nombre | titlecase | slice : 0 : 35}}..</h5>
+    <h5 class="details__title" [title]="detail.producto?.nombre">
+      {{ detail.producto?.nombre | titlecase | slice : 0 : 35 }}..
+    </h5>
     <div class="details__container">
-      <!-- <div class="buttons"><button (click)="goToMoreCheap()">Ver el mas barato</button></div> -->
+      <div class="buttons"><button (click)="goToMoreCheap()" class="cheap__button">Ver el mas barato</button></div>
       <div *ngFor="let sucursal of detail.sucursales">
         <div
           [id]="sucursal.id"
@@ -46,7 +48,6 @@
               </svg>
               ¿Como llegar?
             </a>
-
           </div>
         </div>
       </div>

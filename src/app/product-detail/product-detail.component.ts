@@ -49,12 +49,13 @@ export class ProductDetailComponent {
 
     for (const sucursal of this.detail.sucursales) {
       const precioLista = sucursal.preciosProducto.precioLista;
-      if (precioLista < precioMasBajo) {
+      console.log(precioLista);
+      if (precioLista > 0 && precioLista < precioMasBajo) {
         precioMasBajo = precioLista;
         idMasBarato = sucursal.id;
       }
     }
-
+    console.log(idMasBarato);
     let el = document.getElementById(idMasBarato);
     el!.scrollIntoView({ behavior: 'smooth', block: 'center' });
     el!.classList.add('cheaper')

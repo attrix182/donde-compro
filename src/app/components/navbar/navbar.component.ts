@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PricesApiService } from 'src/app/services/prices-api.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,40 +10,22 @@ import { PricesApiService } from 'src/app/services/prices-api.service';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild('inputAddress') inputAddress: any;
   searchValue!: string;
-  address!: string;
-  addressText!: string;
-  geo: any;
+  totalItems: number = 0;
 
-  constructor(private router: Router, private priceApi: PricesApiService) {}
+  constructor(private router: Router, private priceApi: PricesApiService, private shoppingCart: ShoppingCartService) {}
 
   ngOnInit(): void {
-  }
-
-  getAddress() {
-    this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
-      this.geo = res[0];
-      this.priceApi.setGeo(this.geo);
+    this.shoppingCart.getCart().subscribe((res: any) => {
+      this.totalItems = res.length;
     });
   }
 
-  getLocalAddress() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
-        this.priceApi.setGeo(this.geo);
-        this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
-
-          this.addressText = res.display_name;
-          this.inputAddress.nativeElement.placeholder = this.addressText;
-        });
-      });
-    }
+  goBack(){
+    this.router.navigate(['/']);
   }
-
-  ngAfterViewInit() {
-    this.getLocalAddress();
+  goToCartDetail() {
+    this.router.navigate(['/cart']);
   }
 
 }

@@ -7,7 +7,7 @@ import { ListModeComponent } from './list-mode/list-mode.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  {path: 'list-mode', component: ListModeComponent},
+  {path: 'cart', component: ListModeComponent},
   { path: 'search', component: ProductSearcherComponent },
   { path: 'detail/:id', component: ProductDetailComponent },
 ];

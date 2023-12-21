@@ -1,16 +1,9 @@
-.navbar {
-  height: 80px;
-  background-color: var(--secondary-color);
-  &__location {
-    color: white;
-    margin-left: 15px;
-    padding: 5px;
-    input {
-      background: white;
-      border: 1px solid #dfe1e5;
-      border-radius: 24px;
-      padding: 5px;
-      font-size: 0.8rem;
-    }
-  }
+.navbar{
+  background-color: gray;
+  position:fixed;
+  z-index: 10;
 }
+.example-spacer {
+  flex: 1 1 auto;
+}
+

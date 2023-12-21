@@ -1,4 +1,8 @@
-<div class="card" (click)="goToDetail(product)">
+<div class="card">
+  <div class="card__buttons">
+    <button color="accent"  mat-button  class="card__link-detail" (click)="goToDetail(product)">Ver locales</button>
+  </div>
+
   <div class="card-image">
     <img
       (error)="errorHandler($event)"
@@ -6,12 +10,24 @@
     />
   </div>
 
-    <div class="card__price">${{ product.precioMin }} - ${{ product.precioMax }}</div>
-    <div class="card__name">
-      {{ product.nombre }}
-      <div class="card__presentation">
-        Presentacion: <span class="card__size">{{ product.presentacion }}</span>
-      </div>
+  <div class="card__price">${{ product.precioMin }} - ${{ product.precioMax }}</div>
+  <div class="card__name">
+    {{ product.nombre }}
+    <div class="card__presentation">
+      Presentacion: <span class="card__size">{{ product.presentacion }}</span>
+    </div>
 
+    <div class="card__buttons" >
+      <button *ngIf="!itemInCart(product)" class="card__button-add" mat-fab extended color="accent" (click)="addToCart(product)">
+        <mat-icon>add</mat-icon>
+        Agregar al carrito
+      </button>
+
+
+      <button *ngIf="itemInCart(product)" class="card__button-add" mat-fab extended color="accent" (click)="removeFromCart(product)">
+        <mat-icon>remove</mat-icon>
+        Quitar del carrito
+      </button>
+      </div>
   </div>
 </div>

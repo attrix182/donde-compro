@@ -1,16 +1,10 @@
-<div class="navbar">
-  <div class="navbar__location">
-    Tu ubicación:
-    <input
-      #inputAddress
-      placeholder="Ejemplo 1234, Barrio..."
-      type="text"
-      [(ngModel)]="address"
-      (keyup.enter)="getAddress()"
-    />
-    <button (click)="getAddress()">📍</button>
-    <div>
-      {{ addressText }}
-    </div>
-  </div>
-</div>
+<mat-toolbar class="navbar">
+
+   <span (click)="goBack()">Donde compro</span>
+  <span class="example-spacer"></span>
+
+  <button (click)="goToCartDetail()" mat-icon-button class="shopping_cart-icon" aria-label="Example icon-button with share icon">
+    <mat-icon> shopping_cart</mat-icon>
+    <small>{{totalItems}}</small>
+  </button>
+</mat-toolbar>

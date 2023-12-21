@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PricesApiService } from '../services/prices-api.service';
 import { Sucursal, buyOption, buyOptions, searchProductResponse } from '../models/models';
 import { Router } from '@angular/router';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-list-mode',
@@ -15,17 +16,27 @@ export class ListModeComponent implements OnInit {
   showLocationModal = false;
   loading = false;
   searchValue: string = '';
-  productsList: string[] = [];
+  productsList: any[] = [];
   productsIDs: any[] = [];
   sucursalesIds: string[] = [];
   geo: any;
+  apiError = false;
 
-  constructor(private router:Router, private priceApi: PricesApiService) {}
+  constructor(private router:Router, private priceApi: PricesApiService, private shoppingCart: ShoppingCartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit() {
+    this.getCartProducts();
     this.getLocalAddress();
+  }
+
+  getCartProducts(){
+    this.shoppingCart.getCart().subscribe((res: any) => {
+      this.productsList = res;
+    });
+
   }
 
   getLocalAddress() {
@@ -44,18 +55,25 @@ export class ListModeComponent implements OnInit {
   getSucursales() {
     this.priceApi.getSucursales(this.geo.lat, this.geo.lon).subscribe((res: any) => {
       this.sucursalesIds = this.mapArraySucursales(res);
-      console.log(this.sucursalesIds);
     });
   }
 
   deleteItem(item:string) {
     this.productsList.splice(this.productsList.indexOf(item), 1);
+    if(this.productsList.length == 0){
+      this.results = [];
+
+    }
   }
+
+  errorHandler(event: any) {
+    console.debug(event);
+    event.target.src = "assets/no-image.webp";
+ }
 
   add(product: string) {
     if(!product) return;
     this.productsList.push(product);
-    console.log(this.productsList);
   }
 
   toggleLocationModal() {
@@ -63,10 +81,8 @@ export class ListModeComponent implements OnInit {
   }
 
   searchPrices() {
-
+    this.loading = true;
     this.productsIDs = this.searchList(this.productsList, this.sucursalesIds);
-    console.log(this.productsIDs);
-
   }
 
 
@@ -91,7 +107,7 @@ export class ListModeComponent implements OnInit {
     return stringSucursalIds;
   }
 
-  searchList(productsList: string[], sucursales: string[]) {
+  searchList(productsList: any[], sucursales: string[]) {
     let ids: string[] = [];
     this.priceApi
       .searchListOfProducts(productsList, sucursales)
@@ -107,8 +123,6 @@ export class ListModeComponent implements OnInit {
       if (response.productos && response.productos.length > 0) {
         productIds.push(response.productos[0].id);
         this.productsIDs.push(response.productos[0].id);
-        console.log(this.productsIDs);
-        console.log(this.sucursalesIds);
         this.getPlacesToBuy(this.productsIDs, this.sucursalesIds);
       }
     });
@@ -118,14 +132,12 @@ export class ListModeComponent implements OnInit {
 
   getPlacesToBuy(productsID: string[], sucursales: string[]) {
     this.priceApi.searchTotalPriceInEachMarket(productsID, sucursales).subscribe((res: any) => {
-      console.log(res);
       this.getBestPlaceToBuy(res);
     });
   }
 
   getBestPlaceToBuy(places: any) {
     let results: any[] = [];
-    console.log(places);
     places.forEach((place: any) => {
       place.sucursales.forEach((sucursal: any) => {
         results.push({
@@ -141,6 +153,7 @@ export class ListModeComponent implements OnInit {
     let totals = this.calculateCarts(results);
     this.results = totals;
     console.log(totals);
+    this.loading = false;
   }
 
   calculateCarts(options: buyOptions[]): buyOption[] {

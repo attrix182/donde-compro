@@ -72,6 +72,7 @@ export class HomePageComponent implements AfterViewInit {
   search(event: any) {
     this.apiError = false;
     this.loading = true;
+    this.results = null;
     this.searchSVC.search(event, this.geo).then((res: any) => {
       console.log(res);
       if(res.status === 400){

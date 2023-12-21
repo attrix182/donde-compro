@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PricesApiService } from 'src/app/services/prices-api.service';
 
@@ -9,6 +9,7 @@ import { PricesApiService } from 'src/app/services/prices-api.service';
 })
 export class ModalLocationComponent {
   @Output() closeModal = new EventEmitter();
+  @Input() error!: string;
   @ViewChild('inputAddress') inputAddress: any;
 
   close() {
@@ -18,14 +19,13 @@ export class ModalLocationComponent {
   address!: string;
   addressText!: string;
   geo: any;
+  locationError = '';
 
   constructor(private router: Router, private priceApi: PricesApiService) {}
 
-  ngOnInit(): void {}
-
-  getCurrentLocation(){
-
+  ngOnInit(): void {
   }
+
 
   getAddress() {
     this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
@@ -45,6 +45,19 @@ export class ModalLocationComponent {
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
           this.addressText = res.display_name;
           this.inputAddress.nativeElement.placeholder = this.addressText;
+        }, (error) => {
+          console.log(error.message);
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              this.locationError = 'No otorgaste permisos de ubicación a la web, configuralo desde tu navegador.'
+                break;
+            case error.POSITION_UNAVAILABLE:
+                this.locationError = 'Ubicacion no disponible.'
+                break;
+            case error.TIMEOUT:
+                // Se ha excedido el tiempo para obtener la ubicación.
+                break;
+          }
         });
       });
     }

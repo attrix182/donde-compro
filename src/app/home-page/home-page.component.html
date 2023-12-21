@@ -50,7 +50,16 @@
     </div>
   </section>
 
-  <section class="info" *ngIf="!results && !loading">
+  <section *ngIf="!results && apiError">
+    <div class="searcher__container">
+      <div class="api-error">
+        <span>{{locationError}}</span>
+          <button class="apply-button" (click)="toggleLocationModal()">Configurar ubicación</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="info" *ngIf="!results && !loading && !apiError">
     <div class="card">
       <h1>¿Que es Donde compro?</h1>
       <p><b>Donde compro</b> es una web desarrollada para buscar el mejor precio cerca de tu ubicación.</p>
@@ -105,4 +114,4 @@
   </section>
 </section>
 
-<app-modal-location *ngIf="showLocationModal" (closeModal)="toggleLocationModal()"></app-modal-location>
+<app-modal-location *ngIf="showLocationModal" (closeModal)="toggleLocationModal()" [error]="locationError"></app-modal-location>

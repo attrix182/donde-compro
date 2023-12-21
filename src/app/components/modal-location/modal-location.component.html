@@ -2,7 +2,7 @@
   <div class="modal-content">
     <h2 class="title">Configurar ubicación:</h2>
     <div class="location">
-      <button class="location-button" (click)="getLocalAddress()">
+      <button class="location-button" (click)="getLocalAddress()" *ngIf="!error">
         Detectar ubicación
         <div style="width: 20px">
           <svg
@@ -31,21 +31,6 @@
       <span>Ubicación personalizada:</span>
       <div class="navbar__location">
         <div class="searchbar">
-          <div class="searchbar-wrapper">
-            <div class="searchbar-left">
-              <div (click)="getAddress()" class="search-icon-wrapper">
-                <span class="search-icon searchbar-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                      d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-                    ></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-
-            <div class="searchbar-center">
-              <div class="searchbar-input-spacer"></div>
 
               <input
                 type="text"
@@ -56,19 +41,19 @@
                 (keyup.enter)="getAddress()"
                 placeholder="Calle 1234, Barrio..."
               />
+              <button class="searchbar-button" (click)="getAddress()">Buscar</button>
             </div>
-          </div>
-        </div>
+
 
         <div class="address">
           @if(addressText){
           <span>Ubicación actual:</span>
           }
-          @if(addressText){
+          @if(addressText) {
           <div class="address-text" [title]="addressText">{{ addressText | slice : 0 : 45 }}...</div>
 
           } @else {
-          <span class="loader_container">
+          <span class="loader_container" *ngIf="!error">
             <div class="loader"></div>
           </span>
 

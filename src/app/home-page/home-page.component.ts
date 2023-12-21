@@ -16,8 +16,9 @@ export class HomePageComponent implements AfterViewInit {
   sucursales!: SucursalesResponse;
   geo: any;
   loading = false;
-  showLocationModal = false;
+  showLocationModal = true;
   apiError = false;
+  locationError:string = '';
 
   constructor(private priceApi: PricesApiService, private searchSVC:SearchService) {}
 
@@ -26,6 +27,8 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   getLocalAddress() {
+    //pedir permisos ubicacion
+
 
     const storedGeo = this.priceApi.getStoredGeo();
     if (storedGeo) {
@@ -43,6 +46,19 @@ export class HomePageComponent implements AfterViewInit {
         this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
           this.addressText = res.display_name;
         });
+      }, (error) => {
+        console.log(error.message);
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            this.locationError = 'No otorgaste permisos de ubicación a la web, configuralo desde tu navegador.'
+              break;
+          case error.POSITION_UNAVAILABLE:
+              this.locationError = 'Ubicacion no disponible.'
+              break;
+          case error.TIMEOUT:
+              // Se ha excedido el tiempo para obtener la ubicación.
+              break;
+      }
       });
     }
   }
@@ -63,9 +79,12 @@ export class HomePageComponent implements AfterViewInit {
       }
       this.results = res;
       this.loading = false;
+    }, err => {
+      console.log('err');
+      this.loading = false;
+      this.apiError = true;
     });
   }
-
 
   toggleLocationModal() {
     this.showLocationModal = !this.showLocationModal;

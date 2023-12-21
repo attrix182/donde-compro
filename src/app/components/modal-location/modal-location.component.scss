@@ -16,110 +16,6 @@
   color: white;
   padding: 25px;
   border-radius: 4px;
-  .searchbar {
-    font-size: 14px;
-    font-family: arial, sans-serif;
-    color: #202124;
-    display: flex;
-    z-index: 3;
-    height: 44px;
-    background: white;
-    border: 1px solid #dfe1e5;
-    box-shadow: none;
-    border-radius: 24px;
-    margin: 0 auto;
-    max-width: 70vw;
-
-    &:hover {
-      box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
-      border-color: rgba(225, 227, 230, 0);
-      background-color: #202124;
-      input {
-        color: white;
-      }
-    }
-
-    &-wrapper {
-      flex: 1;
-      display: flex;
-      padding: 5px 8px 0 14px;
-    }
-
-    &-left {
-      font-size: 14px;
-      font-family: arial, sans-serif;
-      color: #202124;
-      display: flex;
-      align-items: center;
-      padding-right: 13px;
-      margin-top: -5px;
-    }
-  }
-
-  .search-icon-wrapper {
-    margin: auto;
-  }
-
-  .search-icon {
-    margin-top: 3px;
-    color: #9aa0a6;
-    height: 20px;
-    line-height: 20px;
-    width: 20px;
-  }
-
-  .searchbar-icon {
-    display: inline-block;
-    fill: currentColor;
-    height: 24px;
-    line-height: 24px;
-    position: relative;
-    width: 24px;
-    cursor: pointer;
-  }
-
-  .searchbar-center {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-  }
-
-  .searchbar-input-spacer {
-    color: transparent;
-    flex: 100%;
-    white-space: pre;
-    height: 34px;
-    font-size: 16px;
-  }
-
-  .searchbar-input {
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    color: rgba(0, 0, 0, 0.87);
-    word-wrap: break-word;
-    outline: none;
-    display: flex;
-    flex: 100%;
-    margin-top: -37px;
-    height: 34px;
-    font-size: 16px;
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .searchbar-right {
-    display: flex;
-    flex: 0 0 auto;
-    margin-top: -5px;
-    align-items: stretch;
-    flex-direction: row;
-  }
-
-  .searchbar-clear-icon {
-    margin-right: 12px;
-  }
 }
 
 .loader {
@@ -138,10 +34,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-button {
-  margin-top: 10px;
 }
 
 .title {
@@ -199,17 +91,38 @@ button {
   }
 }
 
-.navbar{
+.navbar {
   padding: 10px;
-  span{
+  span {
     font-weight: 450;
   }
-  &__location{
-    padding: 5px;
+  &__location {
+    width: 100%;
+    .searchbar {
+      width: 100%;
+      margin-top: 5px;
+      display: inline-flex;
+      gap: 15px;
+      justify-content: center;
+
+      &-input {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #dfe1e5;
+        background-color: white;
+      }
+
+      &-button {
+        padding: 5px;
+        border: 1px solid #dfe1e5;
+        background-color: white;
+        cursor: pointer;
+      }
+    }
   }
 }
 
-.address{
+.address {
   padding: 2px;
   margin-top: 17px;
 }

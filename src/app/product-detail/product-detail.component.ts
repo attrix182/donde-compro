@@ -61,6 +61,7 @@ export class ProductDetailComponent {
   }
 
   goBack() {
+    this.titleService.setTitle('Donde compro');
     this.router.navigate(['/'], { queryParams: { search: this.searchValue } });
   }
 

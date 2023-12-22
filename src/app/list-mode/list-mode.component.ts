@@ -59,10 +59,10 @@ export class ListModeComponent implements OnInit {
   }
 
   deleteItem(item:string) {
-    this.productsList.splice(this.productsList.indexOf(item), 1);
+    this.shoppingCart.removeFromCart(item);
+    //this.productsList.splice(this.productsList.indexOf(item), 1);
     if(this.productsList.length == 0){
       this.results = [];
-
     }
   }
 
@@ -125,19 +125,30 @@ export class ListModeComponent implements OnInit {
         this.productsIDs.push(response.productos[0].id);
         this.getPlacesToBuy(this.productsIDs, this.sucursalesIds);
       }
+    }, (error:any) => {
+      console.log(error);
+      this.apiError = true;
+      this.loading = false;
     });
 
     return productIds;
   }
 
   getPlacesToBuy(productsID: string[], sucursales: string[]) {
+    console.log(productsID, sucursales);
     this.priceApi.searchTotalPriceInEachMarket(productsID, sucursales).subscribe((res: any) => {
       this.getBestPlaceToBuy(res);
+    },
+    (error) => {
+      console.log(error);
+      this.apiError = true;
+      this.loading = false;
     });
   }
 
   getBestPlaceToBuy(places: any) {
     let results: any[] = [];
+    this.loading = false;
     places.forEach((place: any) => {
       place.sucursales.forEach((sucursal: any) => {
         results.push({
@@ -152,7 +163,6 @@ export class ListModeComponent implements OnInit {
     console.log(results);
     let totals = this.calculateCarts(results);
     this.results = totals;
-    console.log(totals);
     this.loading = false;
   }
 

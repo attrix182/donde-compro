@@ -1,6 +1,8 @@
 <div class="card">
   <div class="card__buttons">
-    <button color="accent"  mat-button  class="card__link-detail" (click)="goToDetail(product)">Ver locales</button>
+    <button color="basic" mat-raised-button class="card__link-detail" (click)="goToDetail(product)">
+      <div style="color: white">Ver precios</div>
+    </button>
   </div>
 
   <div class="card-image">
@@ -18,13 +20,13 @@
     </div>
 
     <div class="card__buttons" >
-      <button *ngIf="!itemInCart(product)" class="card__button-add" mat-fab extended color="accent" (click)="addToCart(product)">
+      <button *ngIf="!itemInCart(product)" class="card__button-add" mat-fab extended color="basic" (click)="addToCart(product)">
         <mat-icon>add</mat-icon>
         Agregar al carrito
       </button>
 
 
-      <button *ngIf="itemInCart(product)" class="card__button-add" mat-fab extended color="accent" (click)="removeFromCart(product)">
+      <button *ngIf="itemInCart(product)" class="card__button-add" mat-fab extended color="warn" (click)="removeFromCart(product)">
         <mat-icon>remove</mat-icon>
         Quitar del carrito
       </button>

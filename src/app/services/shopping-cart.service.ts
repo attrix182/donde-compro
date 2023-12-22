@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-/*
+  /*
   [{
     "marca": "COCA COLA",
     "id": "7790895067556",
@@ -24,7 +24,24 @@ export class ShoppingCartService {
     "presentacion": "500.0 cc",
     "cantSucursalesDisponible": 8
 }] */
-  cart$: BehaviorSubject<any> = new BehaviorSubject( []);
+  cart$: BehaviorSubject<any> = new BehaviorSubject([{
+    "marca": "COCA COLA",
+    "id": "7790895067556",
+    "precioMax": 1575,
+    "precioMin": 1007.7,
+    "nombre": "Coca Cola sin Azucar 1.5 Lt",
+    "presentacion": "1.5 lt",
+    "cantSucursalesDisponible": 10
+},
+{
+    "marca": "FANTA",
+    "id": "7790895000836",
+    "precioMax": 760,
+    "precioMin": 538,
+    "nombre": "Gaseosa Naranja Fanta 500 Cc",
+    "presentacion": "500.0 cc",
+    "cantSucursalesDisponible": 8
+}]);
   cart: any = [];
   constructor() {}
 
@@ -34,7 +51,7 @@ export class ShoppingCartService {
   }
 
   getCart() {
-    return this.cart$;
+    return this.cart$.asObservable();
   }
 
   clearCart() {
@@ -43,15 +60,16 @@ export class ShoppingCartService {
   }
 
   removeFromCart(product: any) {
-    this.cart = this.cart.filter((item: any) => item.id !== product.id);
+    this.cart = this.cart$.value.filter((item: any) => item.id !== product.id);
     this.cart$.next(this.cart);
+    console.log(this.cart);
   }
 
   calculateCarts(options: any[]): any {
-    const result = options.reduce((accumulator: any, item) => {
+    options.reduce((accumulator: any, item) => {
       const existingItem: any = accumulator.find((x: any) => x.sucursalId === item.sucursalId);
       if (existingItem) {
-        existingItem.totalPrice += item.precio;
+        existingItem.tot1alPrice += item.precio;
       } else {
         accumulator.push({
           sucursal: item.sucursal,

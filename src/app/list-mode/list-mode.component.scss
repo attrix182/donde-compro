@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
   }
 }
 
@@ -29,34 +30,32 @@
       height: 85px;
     }
   }
-    .card__name {
-      padding: 5px;
-      width: 100%;
-      font-weight: 600;
-      color: rgb(88, 87, 87);
-      font-size: 1rem;
-    }
+  .card__name {
+    padding: 5px;
+    width: 100%;
+    font-weight: 600;
+    color: rgb(88, 87, 87);
+    font-size: 1rem;
+  }
 
-    .card__presentation {
-      color: gray;
-      width: 100%;
-      font-weight: 400;
-      font-size: 14px;
-      padding-top: 10px;
+  .card__presentation {
+    color: gray;
+    width: 100%;
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 10px;
+  }
 
-    }
-
-    .card__buttons{
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 100%;
-    }
-    .card__buttons-delete {
-
-      margin-right: 10px;
-      background-color: rgb(214, 76, 76);
-    }
+  .card__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .card__buttons-delete {
+    margin-right: 10px;
+    background-color: rgb(214, 76, 76);
+  }
 }
 
 .right-float-icon {
@@ -106,10 +105,8 @@
   gap: 10px;
 }
 
-.card__button-go{
-  background-color: rgb(63, 63, 63);
-  color: white;
-width: 200px;
+.card__button-go {
+  width: 200px;
 }
 
 .card-products {
@@ -131,18 +128,6 @@ width: 200px;
     font-size: 1.2rem;
   }
 }
-button {
-  border: none;
-  border-radius: 30px;
-  background-color: white;
-  color: black;
-  box-shadow: 0 1px 10px rgba(212, 212, 215, 0.28);
-  cursor: pointer;
-  padding: 5px;
-  &:hover {
-    background-color: #f2f2f2;
-  }
-}
 
 .item {
   background: rgb(255 255 255);
@@ -160,4 +145,9 @@ button {
 
 .card__empty {
   text-align: center;
+}
+
+.list-container{
+  max-width: 600px;
+margin: auto;
 }

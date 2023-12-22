@@ -1,10 +1,16 @@
 <mat-toolbar class="navbar">
-
-   <span (click)="goBack()">Donde compro</span>
+  <span (click)="goBack()">Donde compro</span>
   <span class="example-spacer"></span>
 
-  <button (click)="goToCartDetail()" mat-icon-button class="shopping_cart-icon" aria-label="Example icon-button with share icon">
-    <mat-icon> shopping_cart</mat-icon>
-    <small>{{totalItems}}</small>
-  </button>
+  <div style="display: flex; align-items: center; height: 100%">
+    <button
+      (click)="goToCartDetail()"
+      mat-icon-button
+      class="shopping_cart-icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon> shopping_cart</mat-icon>
+      <small class="badge">{{ totalItems }}</small>
+    </button>
+  </div>
 </mat-toolbar>

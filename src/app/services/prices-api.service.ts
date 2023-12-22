@@ -104,7 +104,6 @@ export class PricesApiService {
   ): Observable<searchProductResponse[]> {
     const url = 'https://d3e6htiiul5ek9.cloudfront.net/prod/productos';
     const requests: Observable<any>[] = [];
-    console.log(searchValues);
     for (const searchValue of searchValues) {
       const params = new HttpParams()
         .set('string', searchValue.nombre)

@@ -160,10 +160,13 @@ export class ListModeComponent implements OnInit {
         });
       });
     });
-    console.log(results);
     let totals = this.calculateCarts(results);
     this.results = totals;
+    console.log(totals);
     this.loading = false;
+  }
+  noHayStock(results: any[]){
+     return results.every((x: any) => !x.totalPrice);
   }
 
   calculateCarts(options: buyOptions[]): buyOption[] {

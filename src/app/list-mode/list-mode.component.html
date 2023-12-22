@@ -66,6 +66,10 @@
             <br />
             En: {{ option.sucursal.banderaDescripcion }} de {{ option.sucursal.direccion }}
           </article>
+
+        </div>
+        <div *ngIf="!loading && results && noHayStock(results)">
+          <strong>No hay stock en un mismo supermercado de esos productos</strong>
         </div>
 
         <div class="card__empty" *ngIf="(!results || results.length == 0) && !loading">

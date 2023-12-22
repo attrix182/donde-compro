@@ -41,7 +41,7 @@
                 (keydown.enter)="getAddress()"
                 placeholder="Calle 1234, Barrio..."
               />
-              <button class="searchbar-button" (click)="getAddress()">Buscar</button>
+              <button style="color: black !important;" [disabled]="!address" mat-raised-button color="accent" class="searchbar-button" (click)="getAddress()">Buscar</button>
             </div>
 
 

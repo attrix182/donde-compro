@@ -16,6 +16,7 @@
   color: white;
   padding: 25px;
   border-radius: 4px;
+  width: 580px;
 }
 
 .loader {
@@ -125,4 +126,12 @@
 .address {
   padding: 2px;
   margin-top: 17px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .modal-content {
+    width: 350px;
+  }
+
 }

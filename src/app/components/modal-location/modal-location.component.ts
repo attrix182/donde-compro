@@ -20,45 +20,55 @@ export class ModalLocationComponent {
   addressText!: string;
   geo: any;
   locationError = '';
+  loading: boolean = false;
 
   constructor(private router: Router, private priceApi: PricesApiService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   getAddress() {
-    this.priceApi.geocodeAddress(this.address).subscribe((res: any) => {
-      this.geo = res[0];
-      this.priceApi.setGeo(this.geo);
-      this.addressText = res[0].display_name;
-    });
-
+    this.loading = true;
+    this.priceApi.geocodeAddress(this.address).subscribe(
+      (res: any) => {
+        this.geo = res[0];
+        this.priceApi.setGeo(this.geo);
+        this.addressText = res[0].display_name;
+        this.loading = false;
+      },
+      (error) => {
+        this.loading = false;
+      }
+    );
   }
 
   getLocalAddress() {
     if (navigator.geolocation) {
+      this.loading = true;
       navigator.geolocation.getCurrentPosition((position) => {
-
         this.geo = { lat: position.coords.latitude, lon: position.coords.longitude };
         this.priceApi.setGeo(this.geo);
-        this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe((res: any) => {
-          this.addressText = res.display_name;
-          this.inputAddress.nativeElement.placeholder = this.addressText;
-        }, (error) => {
-          console.log(error.message);
-          switch(error.code) {
-            case error.PERMISSION_DENIED:
-              this.locationError = 'No otorgaste permisos de ubicación a la web, configuralo desde tu navegador.'
+        this.priceApi.getNameAddress(this.geo.lat, this.geo.lon).subscribe(
+          (res: any) => {
+            this.addressText = res.display_name;
+            this.inputAddress.nativeElement.placeholder = this.addressText;
+            this.loading = false;
+          },
+          (error) => {
+            this.loading = false;
+            console.log(error.message);
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                this.locationError = 'No otorgaste permisos de ubicación a la web, configuralo desde tu navegador.';
                 break;
-            case error.POSITION_UNAVAILABLE:
-                this.locationError = 'Ubicacion no disponible.'
+              case error.POSITION_UNAVAILABLE:
+                this.locationError = 'Ubicacion no disponible.';
                 break;
-            case error.TIMEOUT:
+              case error.TIMEOUT:
                 // Se ha excedido el tiempo para obtener la ubicación.
                 break;
+            }
           }
-        });
+        );
       });
     }
   }
